@@ -1,26 +1,26 @@
-def add_numbers(a, b):
-    return a + b
+import unittest
 
-def subtract_numbers(a, b):
-    return a - b
+class TestMathFunctions(unittest.TestCase):
 
-def multiply_numbers(a, b):
-    return a * b
+    def test_add_numbers(self):
+        result = add_numbers(5, 3)
+        self.assertEqual(result, 8)
 
-def divide_numbers(a, b):
-    if b != 0:
-        return a / b
-    else:
-        raise ValueError("Cannot divide by zero")
+    def test_subtract_numbers(self):
+        result = subtract_numbers(10, 4)
+        self.assertEqual(result, 6)
 
-result = add_numbers(5, 3)
-print("Addition:", result)
+    def test_multiply_numbers(self):
+        result = multiply_numbers(2, 6)
+        self.assertEqual(result, 12)
 
-result = subtract_numbers(10, 4)
-print("Subtraction:", result)
+    def test_divide_numbers(self):
+        result = divide_numbers(10, 2)
+        self.assertEqual(result, 5)
 
-result = multiply_numbers(2, 6)
-print("Multiplication:", result)
+    def test_divide_by_zero(self):
+        with self.assertRaises(ValueError):
+            divide_numbers(10, 0)
 
-result = divide_numbers(10, 2)
-print("Division:", result)
+if __name__ == '__main__':
+    unittest.main()
