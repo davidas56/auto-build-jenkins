@@ -10,20 +10,15 @@ pipeline {
         
         stage('Build') {
             steps {
-                sh 'npm install'
-                sh 'npm run build'
+                sh 'pip install -r requirements.txt'
+                sh 'python -m unittest discover -s tests -p "*_test.py"'
             }
         }
         
-        stage('Test') {
+        stage('Containerize') {
             steps {
-                sh 'npm run test'
-            }
-        }
-        
-        stage('Deploy') {
-            steps {
-                // Comandos para implementar tu aplicación en un entorno de producción
+                sh 'docker build -t myapp .'
+                sh 'docker run myapp'
             }
         }
     }
